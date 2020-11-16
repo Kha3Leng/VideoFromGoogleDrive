@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
         pager = findViewById(R.id.pager);
 
 
-
         db = new DatabaseHeloper(this);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -89,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
                 DeleteFragment df = DeleteFragment.newInstance();
                 df.show(getSupportFragmentManager(), "delete dialog");
                 break;
+            case R.id.update:
+                UpdateFragment uf = UpdateFragment.newInstance();
+                uf.show(getSupportFragmentManager(), "update dialog");
+                break;
 
 
         }
@@ -111,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
             dummy.putString("Name", cur.getString(0));
             dummy.putString("Age", cur.getString(1));
             dummy.putString("ID", cur.getString(2));
-            datas.add("Name : "+cur.getString(0)
-            +", Age : "+cur.getString(1)
-            +", ID : "+cur.getString(2));
+            datas.add("Name : " + cur.getString(0)
+                    + ", Age : " + cur.getString(1)
+                    + ", ID : " + cur.getString(2));
 //            datas.add(dummy);
 //            dummy.clear();
         }
@@ -149,24 +152,78 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
                     insertion(data);
                     break;
                 case "delete":
-                    Toast.makeText(this, "deleting "+bundle.getString("ID"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "deleting " + bundle.getString("ID"), Toast.LENGTH_SHORT).show();
                     if (!deletion(bundle.getString("ID")))
-                        Toast.makeText(this, "doesnt have record with id "+bundle.getString("ID"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "doesnt have record with id " + bundle.getString("ID"), Toast.LENGTH_SHORT).show();
+                    break;
+                case "update":
+                    Toast.makeText(this, "updating..", Toast.LENGTH_SHORT).show();
+                    if (!updateData(bundle))
+                        Toast.makeText(this, "doesn't have record with id", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
     }
 
+    private boolean updateData(Bundle bundle){ return db.updateData(bundle);}
+
     private boolean deletion(String id) {
         return db.deleteData(id);
     }
 
-    public static class DeleteFragment extends DialogFragment{
+
+    public static class UpdateFragment extends DialogFragment {
+
         DataGetterFragmentListener listener;
+
+        @Override
+        public void onAttach(@NonNull Context context) {
+            super.onAttach(context);
+
+            if (context instanceof DataGetterFragmentListener)
+                listener = (DataGetterFragmentListener) context;
+        }
+
+        public static UpdateFragment newInstance(){
+            return new UpdateFragment();
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogU = inflater.inflate(R.layout.fragment_update, null);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(dialogU)
+                    .setTitle("Update")
+                    .setCancelable(true)
+                    .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            EditText name = dialogU.findViewById(R.id.name);
+                            EditText age = dialogU.findViewById(R.id.age);
+                            EditText id = dialogU.findViewById(R.id.idid);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", name.getText().toString());
+                            bundle.putInt("age", Integer.parseInt(age.getText().toString()));
+                            bundle.putInt("id", Integer.parseInt(id.getText().toString()));
+                            bundle.putString("type", "update");
+                            listener.getData(bundle);
+                        }
+                    });
+            return builder.create();
+        }
+    }
+
+    public static class DeleteFragment extends DialogFragment {
+        DataGetterFragmentListener listener;
+
         public DeleteFragment() {
         }
 
-        public static DeleteFragment newInstance(){
+        public static DeleteFragment newInstance() {
             return new DeleteFragment();
         }
 

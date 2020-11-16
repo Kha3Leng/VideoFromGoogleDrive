@@ -50,4 +50,12 @@ public class DatabaseHeloper  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return (db.delete(TABLE, " ID=? ",new String[]{id})<1)? false: true;
     }
+
+    public boolean updateData(Bundle bundle){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, bundle.getString("name"));
+        contentValues.put(COL_2, bundle.getInt("age"));
+        return (db.update(TABLE, contentValues, " ID = ? ", new String[]{String.valueOf(bundle.getInt("id"))}) < 1)? false: true ;
+    }
 }
