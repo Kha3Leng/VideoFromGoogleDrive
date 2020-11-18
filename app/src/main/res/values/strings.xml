@@ -3,4 +3,10 @@
     <string name="hello">No Match foudn</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="spinner_dropdown">
+        <item name="hello">Hello</item>
+        <item name="world">World</item>
+        <item name="christmas">Chrismax</item>
+    </string-array>
 </resources>
