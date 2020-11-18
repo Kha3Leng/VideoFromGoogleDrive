@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.videofromgoogledrive.PlayWithFragments.ImplicitFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
         adapter.addFragment(SearchViewListView.newInstance(), "Search & List");
         adapter.addFragment(new WebView().newInstance(), "Web View");
         adapter.addFragment(HostTwoFragments.newInstance(), "Fragments");
+        adapter.addFragment(ImplicitFragment.newInstance(), "Implicit Intent");
 
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager, true);
