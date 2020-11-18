@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.videofromgoogledrive.R;
@@ -53,6 +56,21 @@ public class ImplicitFragment extends Fragment {
 
         EditText urls = view.findViewById(R.id.url);
         Button browse = view.findViewById(R.id.browse);
+
+        Spinner sp = view.findViewById(R.id.dropdown_menu);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.spinner_dropdown, android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(adapter);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), "You clicked "+adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override

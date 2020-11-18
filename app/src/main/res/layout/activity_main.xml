@@ -22,4 +22,5 @@
         android:id="@+id/pager"
         app:layout_constraintTop_toBottomOf="@+id/tab"/>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,5 +26,9 @@
         android:icon="@drawable/ic__03_read"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/activity_search"
+        android:title="Search Activity"
+        app:showAsAction="never"/>
+
 
 </menu>

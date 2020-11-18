@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.videofromgoogledrive.PlayWithFragments.ImplicitFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
 
     Bundle data;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
 
         tabLayout = findViewById(R.id.tab);
         pager = findViewById(R.id.pager);
-
 
         db = new DatabaseHeloper(this);
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
         for (int i = 0; i < adapter.getCount(); i++) {
             tabLayout.getTabAt(i).setText(adapter.getTitle(i));
         }
+
 
     }
 
@@ -93,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
             case R.id.update:
                 UpdateFragment uf = UpdateFragment.newInstance();
                 uf.show(getSupportFragmentManager(), "update dialog");
+                break;
+            case R.id.activity_search:
+                Intent intent = new Intent(MainActivity.this, SearchViewToolBarActivity.class);
+                startActivity(intent);
                 break;
 
 
