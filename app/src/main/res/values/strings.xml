@@ -9,4 +9,12 @@
         <item name="world">World</item>
         <item name="christmas">Chrismax</item>
     </string-array>
+
+    <string-array name="photos">
+        <item>@drawable/alena</item>
+        <item>@drawable/alena</item>
+
+        <item>@drawable/alena</item>
+
+    </string-array>
 </resources>

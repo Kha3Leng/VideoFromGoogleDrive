@@ -3,12 +3,14 @@ package com.example.videofromgoogledrive;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -27,6 +29,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.videofromgoogledrive.PlayWithFragments.ImplicitFragment;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("ALL");
@@ -100,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
             case R.id.activity_search:
                 Intent intent = new Intent(MainActivity.this, SearchViewToolBarActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.material:
+                Intent intentAct = new Intent(MainActivity.this, MaterialDesign.class);
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out);
+                startActivity(intentAct, optionsCompat.toBundle());
                 break;
 
 
