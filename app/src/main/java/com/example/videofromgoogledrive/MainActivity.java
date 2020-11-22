@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements DataGetterFragmen
                 break;
             case R.id.material:
                 Intent intentAct = new Intent(MainActivity.this, MaterialDesign.class);
-                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out);
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 startActivity(intentAct, optionsCompat.toBundle());
                 break;
 
